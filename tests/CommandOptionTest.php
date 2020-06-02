@@ -27,7 +27,7 @@ class CommandOptionTest extends TestCase
         $env = Dotenv::create(getcwd() . '/tests/');
         $env->load();
         $this->registerSnuffRepos([
-            'optionRepository' => CommandOptionRepository::class
+            'commandOptionRepository' => CommandOptionRepository::class
         ]);
     }
 
@@ -48,13 +48,13 @@ class CommandOptionTest extends TestCase
 
     public function testConfigure()
     {
-        $this->createWithSnuffRepo('optionRepository', $this->getOptionMock());
-        $this->createWithSnuffRepo('optionRepository', new CommandOption([
+        $this->createWithSnuffRepo('commandOptionRepository', $this->getOptionMock());
+        $this->createWithSnuffRepo('commandOptionRepository', new CommandOption([
             CommandOption::FIELD__COMMANDS_NAMES => ['test'],
             CommandOption::FIELD__NAME => 'qualify',
             CommandOption::FIELD__SHORTCUT => 'q'
         ]));
-        $this->createWithSnuffRepo('optionRepository', new CommandOption([
+        $this->createWithSnuffRepo('commandOptionRepository', new CommandOption([
             CommandOption::FIELD__COMMANDS_NAMES => ['test'],
             CommandOption::FIELD__NAME => 'q',
             CommandOption::FIELD__SHORTCUT => ''
