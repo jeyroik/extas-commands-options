@@ -1,21 +1,23 @@
 <?php
 namespace tests;
 
-use Dotenv\Dotenv;
-use extas\components\options\Option;
-use extas\components\options\OptionRepository;
+use extas\interfaces\options\ICommandOption;
+use extas\components\Item;
+use extas\components\options\CommandOption;
+use extas\components\options\CommandOptionRepository;
 use extas\components\options\TConfigure;
 use extas\components\repositories\TSnuffRepository;
-use extas\interfaces\options\IOption;
+
+use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class OptionTest
+ * Class CommandOptionTest
  *
  * @package tests
  * @author jeyroik <jeyroik@gmail.com>
  */
-class OptionTest extends TestCase
+class CommandOptionTest extends TestCase
 {
     use TSnuffRepository;
 
@@ -25,7 +27,7 @@ class OptionTest extends TestCase
         $env = Dotenv::create(getcwd() . '/tests/');
         $env->load();
         $this->registerSnuffRepos([
-            'optionRepository' => OptionRepository::class
+            'optionRepository' => CommandOptionRepository::class
         ]);
     }
 
@@ -47,18 +49,18 @@ class OptionTest extends TestCase
     public function testConfigure()
     {
         $this->createWithSnuffRepo('optionRepository', $this->getOptionMock());
-        $this->createWithSnuffRepo('optionRepository', new Option([
-            Option::FIELD__COMMANDS_NAMES => ['test'],
-            Option::FIELD__NAME => 'qualify',
-            Option::FIELD__SHORTCUT => 'q'
+        $this->createWithSnuffRepo('optionRepository', new CommandOption([
+            CommandOption::FIELD__COMMANDS_NAMES => ['test'],
+            CommandOption::FIELD__NAME => 'qualify',
+            CommandOption::FIELD__SHORTCUT => 'q'
         ]));
-        $this->createWithSnuffRepo('optionRepository', new Option([
-            Option::FIELD__COMMANDS_NAMES => ['test'],
-            Option::FIELD__NAME => 'q',
-            Option::FIELD__SHORTCUT => ''
+        $this->createWithSnuffRepo('optionRepository', new CommandOption([
+            CommandOption::FIELD__COMMANDS_NAMES => ['test'],
+            CommandOption::FIELD__NAME => 'q',
+            CommandOption::FIELD__SHORTCUT => ''
         ]));
 
-        $command = new class {
+        $command = new class extends Item {
             use TConfigure;
             public array $args = [];
 
@@ -71,6 +73,11 @@ class OptionTest extends TestCase
             {
                 $this->args[] = func_get_args();
             }
+
+            protected function getSubjectForExtension(): string
+            {
+                return 'test';
+            }
         };
 
         $command->configure();
@@ -79,17 +86,17 @@ class OptionTest extends TestCase
     }
 
     /**
-     * @return IOption
+     * @return ICommandOption
      */
-    protected function getOptionMock(): IOption
+    protected function getOptionMock(): ICommandOption
     {
-        return new Option([
-            Option::FIELD__NAME => 'test',
-            Option::FIELD__DESCRIPTION => 'test',
-            Option::FIELD__COMMANDS_NAMES => ['test'],
-            Option::FIELD__DEFAULT => 'test',
-            Option::FIELD__SHORTCUT => 't',
-            Option::FIELD__MODE => 4
+        return new CommandOption([
+            CommandOption::FIELD__NAME => 'test',
+            CommandOption::FIELD__DESCRIPTION => 'test',
+            CommandOption::FIELD__COMMANDS_NAMES => ['test'],
+            CommandOption::FIELD__DEFAULT => 'test',
+            CommandOption::FIELD__SHORTCUT => 't',
+            CommandOption::FIELD__MODE => 4
         ]);
     }
 }

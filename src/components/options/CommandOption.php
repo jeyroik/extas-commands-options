@@ -4,16 +4,16 @@ namespace extas\components\options;
 use extas\components\Item;
 use extas\components\THasDescription;
 use extas\components\THasName;
-use extas\interfaces\options\IOption;
+use extas\interfaces\options\ICommandOption;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class Option
+ * Class CommandOption
  *
  * @package extas\components\options
  * @author jeyroik@gmail.com
  */
-class Option extends Item implements IOption
+class CommandOption extends Item implements ICommandOption
 {
     use THasName;
     use THasDescription;

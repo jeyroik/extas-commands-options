@@ -1,13 +1,13 @@
 <?php
 namespace extas\components\options;
 
-use extas\interfaces\options\IOption;
+use extas\interfaces\options\ICommandOption;
 use extas\interfaces\repositories\IRepository;
 
 /**
  * Trait TConfigure
  *
- * @method IRepository optionRepository()
+ * @method IRepository commandOptionRepository()
  * @method addOption(string $name, string $shortcut, int $mode, string $description, $default)
  *
  * @package extas\components\options
@@ -23,10 +23,10 @@ trait TConfigure
     protected function configureWithOptions(string $commandName, array $reserved)
     {
         /**
-         * @var $options IOption[]
+         * @var $options ICommandOption[]
          */
-        $repo = $this->optionRepository();
-        $options = $repo->all([IOption::FIELD__COMMANDS_NAMES => $commandName]);
+        $repo = $this->commandOptionRepository();
+        $options = $repo->all([ICommandOption::FIELD__COMMANDS_NAMES => $commandName]);
 
         foreach ($options as $option) {
             if (isset($reserved[$option->getName()]) || isset($reserved[$option->getShortcut()])) {

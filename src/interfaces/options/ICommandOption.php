@@ -6,12 +6,12 @@ use extas\interfaces\IHasName;
 use extas\interfaces\IItem;
 
 /**
- * Interface IOption
+ * Interface ICommandOption
  *
  * @package extas\interfaces\options
  * @author jeyroik@gmail.com
  */
-interface IOption extends IItem, IHasName, IHasDescription
+interface ICommandOption extends IItem, IHasName, IHasDescription
 {
     public const SUBJECT = 'extas.command.option';
 

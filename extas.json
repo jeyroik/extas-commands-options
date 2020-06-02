@@ -1,0 +1,18 @@
+{
+  "name": "extas/commands-options",
+  "package_classes": [
+    {
+      "class": "extas\\components\\options\\CommandOptionRepository",
+      "interface": "commandOptionRepository"
+    }
+  ],
+  "extensions": [
+    {
+      "class": "extas\\components\\extensions\\ExtensionRepositoryGet",
+      "interface": "extas\\interfaces\\extensions\\IExtensionRepositoryGet",
+      "subject": "*",
+      "methods": ["commandOptionRepository"],
+      "install_on": "initialization"
+    }
+  ]
+}

@@ -4,12 +4,12 @@ namespace extas\interfaces\options;
 use extas\interfaces\repositories\IRepository;
 
 /**
- * Interface IOptionRepository
+ * Interface ICommandOptionRepository
  *
  * @package extas\interfaces\options
  * @author jeyroik <jeyroik@gmail.com>
  */
-interface IOptionRepository extends IRepository
+interface ICommandOptionRepository extends IRepository
 {
 
 }
