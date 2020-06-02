@@ -14,5 +14,11 @@
       "methods": ["commandOptionRepository"],
       "install_on": "initialization"
     }
+  ],
+  "plugins": [
+    {
+      "class": "extas\\components\\plugins\\install\\InstallCommandsOptions",
+      "stage": "extas.install.section.commands_options"
+    }
   ]
 }
