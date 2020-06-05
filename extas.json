@@ -1,5 +1,6 @@
 {
   "name": "extas/commands-options",
+  "installer_version": 3,
   "package_classes": [
     {
       "class": "extas\\components\\options\\CommandOptionRepository",
